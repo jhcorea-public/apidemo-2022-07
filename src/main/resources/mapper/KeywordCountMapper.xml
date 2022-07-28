@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.practice.haeng.apidemo.search.consumerapp.dao.KeywordCountDAO">
+
+
+    <select id="selectKeywordTop" resultType="KeywordCount">
+        SELECT
+        keyword AS keword,
+        search_count AS searchCount
+        FROM keyword_count
+        ORDER BY search_count DESC
+        LIMIT #{top}
+    </select>
+
+    <select id="selectKeyword" resultType="KeywordCount">
+        SELECT
+            keyword AS keyword,
+            search_count AS searchCount,
+            update_date AS updateDate
+        FROM keyword_count
+        <where>
+            keyword = #{keyword}
+        </where>
+        LIMIT 1
+    </select>
+
+    <insert id="insertKeyword">
+    INSERT INTO
+        keyword_count (keyword, search_count, update_date)
+    VALUES
+        (#{keyword}, #{initCount}, #{updateDate})
+    </insert>
+
+
+    <update id="increaseKeywordCount">
+        UPDATE keyword_count
+        SET
+            search_count = search_count + #{increase},
+            update_date = #{updateDate}
+        <where>
+            keyword = #{keyword}
+        </where>
+    </update>
+
+</mapper>

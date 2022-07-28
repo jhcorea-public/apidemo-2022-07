@@ -1,0 +1,41 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+#    schema: classpath:h2/schema.sql
+    initialization-mode: always
+  sql:
+    init:
+      mode: always
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+
+# 각각 옵션에 대해서 다시한번 보자.
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: org.practice.haeng.apidemo.search.common
+  configuration:
+    cache-enabled: false
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: false
+    use-generated-keys: false
+    auto-mapping-unknown-column-behavior: failing
+    default-executor-type: simple
+    use-actual-param-name: false
+
+kafka:
+  bootstrap:
+    servers: localhost:9092
+
+logging:
+  level:
+    root: warn
+    org.practice.haeng: debug
+    org.springframework.web.client.RestTemplate: debug

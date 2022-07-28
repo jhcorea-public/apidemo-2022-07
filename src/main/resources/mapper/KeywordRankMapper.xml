@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.practice.haeng.apidemo.search.webapp.rank.dao.KeywordRankDAO">
+
+
+    <select id="selectTopKeyword" resultType="KeywordCount">
+        SELECT
+        keyword AS keyword,
+        search_count AS searchCount
+        FROM keyword_count
+        ORDER BY search_count DESC
+        LIMIT #{top}
+    </select>
+
+</mapper>
